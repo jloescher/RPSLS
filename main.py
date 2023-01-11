@@ -14,3 +14,28 @@ class Player:
 
     def return_score(self):
         return self.score
+
+
+# Create the human player
+class Human(Player):
+    def __init__(self):
+        super().__init__()
+
+    def get_input(self):
+        print("Please choose from the below selection.")
+        for item in list_choice:
+            print(item.title())
+        my_input = input("Please enter your choice: ").strip()
+        choice = my_input.lower()
+        if choice in list_choice:
+            self.choice = choice
+            return {
+                "error": None,
+                "choice": self.choice,
+            }
+        else:
+            run = False
+            return {
+                "error": "Wrong Input",
+                "choice": None,
+            }
