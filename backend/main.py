@@ -1,5 +1,3 @@
-import trio
-from hypercorn.trio import serve
 from fastapi import FastAPI, Request
 from game import Human, Computer, Game
 
