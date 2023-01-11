@@ -39,3 +39,17 @@ class Human(Player):
                 "error": "Wrong Input",
                 "choice": None,
             }
+
+
+# Create the computer player
+class Computer(Player):
+    def __init__(self) -> None:
+        super().__init__()
+
+    def get_input(self):
+        choice = list_choice[randint(0, len(list_choice) - 1)].lower()
+        self.choice = choice
+        return {
+            "error": None,
+            "choice": self.choice,
+        }
