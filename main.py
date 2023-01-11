@@ -188,3 +188,14 @@ class Game:
             if check["winner"] == True:
                 self.run = False
             print(check["message"])
+
+def main():
+    run = True
+    my_player = Human()
+    computer = Computer()
+    game = Game(my_player, computer, run)
+    game.run_game()
+
+
+if __name__ == "__main__":
+    main()
