@@ -18,25 +18,26 @@ class Player:
 
 # Create the human player
 class Human(Player):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
 
-    def get_input(self):
-        print("Please choose from the below selection.")
-        for item in list_choice:
-            print(item.title())
-        my_input = input("Please enter your choice: ").strip()
-        choice = my_input.lower()
-        if choice in list_choice:
-            self.choice = choice
+    def get_input(self, choice: str):
+        # ----- USED BEFORE API IMPLEMENTATION -----
+        # print("Please choose from the below selection.")
+        # for item in list_choice:
+        #     print(item.title())
+        # my_input = input("Please enter your choice: ").strip()
+        # choice = my_input.lower()
+        self.choice = choice
+        if self.choice in list_choice:
             return {
                 "error": None,
                 "choice": self.choice,
             }
         else:
-            run = False
             return {
                 "error": "Wrong Input",
+                "message": "Invalid input! You have not entered rock, paper, scissors, lizard or spock.",
                 "choice": None,
             }
 
@@ -57,15 +58,16 @@ class Computer(Player):
 
 # Create the Game Logic
 class Game:
-    def __init__(self, player: Human, computer: Computer, run: bool):
+    def __init__(self, player: Human, computer: Computer):
         self.player = player
         self.computer = computer
-        self.run = True
+        # ----- USED BEFORE API IMPLEMENTATION -----
+        # self.run = True
 
     def check_winner(self):
         if self.player.choice == self.computer.choice:
             return {
-                "winner": False,
+                "winner": "Tie",
                 "message": "It's a tie!",
             }
         else:
@@ -73,49 +75,49 @@ class Game:
                 case "rock":
                     if self.computer.choice == "scissors":
                         return {
-                            "winner": True,
+                            "winner": "Player",
                             "message": "You win!",
                         }
                     elif self.computer.choice == "paper":
                         return {
-                            "winner": False,
+                            "winner": "Computer",
                             "message": "Computer wins!",
                         }
                     elif self.computer.choice == "lizard":
                         return {
-                            "winner": True,
+                            "winner": "Player",
                             "message": "You win!",
                         }
                     elif self.computer.choice == "spock":
                         return {
-                            "winner": False,
+                            "winner": "Computer",
                             "message": "Computer wins!",
                         }
                 case "paper":
                     if self.computer.choice == "rock":
                         return {
-                            "winner": True,
+                            "winner": "Player",
                             "message": "You win!",
                         }
                     elif self.computer.choice == "scissors":
                         return {
-                            "winner": False,
+                            "winner": "Computer",
                             "message": "Computer wins!",
                         }
                     elif self.computer.choice == "lizard":
                         return {
-                            "winner": False,
+                            "winner": "Computer",
                             "message": "Computer wins!",
                         }
                     elif self.computer.choice == "spock":
                         return {
-                            "winner": True,
+                            "winner": "Player",
                             "message": "You win!",
                         }
                 case "scissors":
                     if self.computer.choice == "rock":
                         return {
-                            "winner": False,
+                            "winner": "Computer",
                             "message": "Computer wins!",
                         }
                     elif self.computer.choice == "paper":
@@ -125,54 +127,54 @@ class Game:
                         }
                     elif self.computer.choice == "lizard":
                         return {
-                            "winner": True,
+                            "winner": "Player",
                             "message": "You win!",
                         }
                     elif self.computer.choice == "spock":
                         return {
-                            "winner": False,
+                            "winner": "Computer",
                             "message": "Computer wins!",
                         }
                 case "lizard":
                     if self.computer.choice == "rock":
                         return {
-                            "winner": False,
+                            "winner": "Computer",
                             "message": "Computer wins!",
                         }
                     elif self.computer.choice == "paper":
                         return {
-                            "winner": True,
+                            "winner": "Player",
                             "message": "You win!",
                         }
                     elif self.computer.choice == "scissors":
                         return {
-                            "winner": False,
+                            "winner": "Computer",
                             "message": "Computer wins!",
                         }
                     elif self.computer.choice == "spock":
                         return {
-                            "winner": True,
+                            "winner": "Player",
                             "message": "You win!",
                         }
                 case "spock":
                     if self.computer.choice == "rock":
                         return {
-                            "winner": True,
+                            "winner": "Player",
                             "message": "You win!",
                         }
                     elif self.computer.choice == "paper":
                         return {
-                            "winner": False,
+                            "winner": "Computer",
                             "message": "Computer wins!",
                         }
                     elif self.computer.choice == "scissors":
                         return {
-                            "winner": True,
+                            "winner": "Player",
                             "message": "You win!",
                         }
                     elif self.computer.choice == "lizard":
                         return {
-                            "winner": False,
+                            "winner": "Computer",
                             "message": "Computer wins!",
                         }
                 case _:
@@ -188,6 +190,7 @@ class Game:
             if check["winner"] == True:
                 self.run = False
             print(check["message"])
+
 
 def main():
     run = True
