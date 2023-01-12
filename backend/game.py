@@ -122,7 +122,7 @@ class Game:
                         }
                     elif self.computer.choice == "paper":
                         return {
-                            "winner": True,
+                            "winner": "Player",
                             "message": "You win!",
                         }
                     elif self.computer.choice == "lizard":

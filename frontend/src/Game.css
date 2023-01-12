@@ -34,26 +34,27 @@ body {
   color: gray;
 }
 
-.choices {
-  margin-top: 30px;
-  display: flex;
-  justify-content: space-around;
+/* selection styles */
+.input-hidden {
+  position: absolute;
+  left: -9999px;
 }
 
-.choice {
+input[type=radio]:checked + label>img {
+  border: 1px solid #fff;
+  box-shadow: 0 0 3px 3px #090;
+}
+
+/* Stuff after this is only to make things more pretty */
+input[type=radio] + label>img {
+  border: 1px dashed #444;
   width: 100px;
   height: 100px;
-  border: 1px solid gray;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 36px;
+  transition: 500ms all;
 }
 
-/* for example, styling of rock choice */
-.choice.rock {
-  background-color: #9b4dca;
-  color: white;
+input[type=radio]:checked + label>img {
+  transform: 
+    rotateZ(-10deg) 
+    rotateX(10deg);
 }
-

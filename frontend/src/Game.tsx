@@ -1,5 +1,10 @@
 import React, { useState } from "react";
-import { Card, CardHeader, CardBody, CardFooter, useToast, Progress } from '@chakra-ui/react'
+import { Card, CardHeader, CardBody, CardFooter, useToast, Progress, Divider } from '@chakra-ui/react'
+import rock from "./images/rock.jpeg"
+import paper from "./images/paper.png"
+import scissors from "./images/scissors.png"
+import lizard from "./images/lizard.jpeg"
+import spock from "./images/spock.jpeg"
 
 import "./Game.css";
 
@@ -13,12 +18,13 @@ interface Result {
 interface Score {
   computer: number
   player: number
+  tie: number
 }
 
 const Game: React.FC<GameProps> = () => {
     const [playerChoice, setPlayerChoice] = useState("");
     const [result, setResult] = useState<Result>({ message: "", winner: "" });
-    const [score, setScore] = useState<Score>({ player: 0, computer: 0 })
+    const [score, setScore] = useState<Score>({ player: 0, computer: 0, tie: 0 })
     const toast = useToast()
 
     const handleChoice = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,14 +46,17 @@ const Game: React.FC<GameProps> = () => {
         setResult(data.result);
         switch (data.result.winner) {
           case "Player":
-            setScore({ player: score.player += 1, computer: score.computer })
+            setScore({ player: score.player += 1, computer: score.computer, tie: score.tie })
             break
           case "Computer":
-            setScore({ player: score.player, computer: score.computer += 1 })
+            setScore({ player: score.player, computer: score.computer += 1, tie: score.tie })
+            break
+          case "Tie":
+            setScore({ player: score.player, computer: score.computer, tie: score.tie += 1 })
             break
         }
         toast({
-          title: `${data.result.winner} won!`,
+          title: data.result.winner !== "Tie" ? `${data.result.winner} won!` : `${data.result.winner}`,
           description: data.result.message,
           status: data.result.winner === "Player" ? 'success' : data.result.winner === "Computer" ? 'error' : 'warning',
           position: "bottom-left",
@@ -66,67 +75,110 @@ const Game: React.FC<GameProps> = () => {
           <h1 className="text-xl font-medium">Rock Paper Scissors Lizard Spock</h1>
         </CardHeader>
         <CardBody>
-        <div className="flex flex-col items-center mt-4">
-          <label className="inline-block font-medium">
+          <div className="flex flex-row items-end">
+              <div className="flex-row">
+                <div className="flex-col"><h3>Player: {score.player}</h3></div>
+                <div className="flex-col">
+                  <Progress className="w-24 m-4" colorScheme={score.player > score.computer ? 'green' : 'red'} size='md' max={score.computer + score.player + score.tie} value={score.player} />
+                </div>
+              </div>
+              <div className="flex-row">
+                <div className="flex-col"><h3>Computer: {score.computer}</h3></div>
+                <div className="flex-col">
+                  <Progress className="w-24 m-4" colorScheme={score.computer > score.player ? 'green' : 'red'} size='md' max={score.computer + score.player + score.tie} value={score.computer} />
+                </div>
+              </div>
+              <div className="flex-row">
+                <div className="flex-col"><h3>Tie: {score.computer}</h3></div>
+                <div className="flex-col">
+                  <Progress className="w-24 m-4" colorScheme={'yellow'} size='md' max={score.computer + score.player + score.tie} value={score.tie} />
+                </div>
+              </div>
+          </div>
+          <Divider />
+          <div className="flex flex-row items-center m-4">
             <input
-              className="mr-2"
+              id="Rock"
+              className="input-hidden"
               type="radio"
               name="choice"
               value="rock"
               onChange={handleChoice}
             />
-            Rock
-          </label>
-          <label className="inline-block font-medium">
+            <label className="inline-block p-4" htmlFor="Rock">
+              <img
+                src={rock}
+                alt="Rock" />
+            </label>
+            
             <input
-              className="mr-2"
+              id="Paper"
+              className="input-hidden"
               type="radio"
               name="choice"
               value="paper"
               onChange={handleChoice}
             />
-            Paper
-          </label>
-          <label className="inline-block font-medium">
+            <label className="inline-block p-4" htmlFor="Paper">
+              <img
+                src={paper}
+                alt="Paper" />
+            </label>
+            
             <input
-              className="mr-2"
+              id="Scissors"
+              className="input-hidden"
               type="radio"
               name="choice"
               value="scissors"
               onChange={handleChoice}
             />
-            Scissors
-          </label>
-          <label className="inline-block font-medium">
+            <label className="inline-block p-4" htmlFor="Scissors">
+              <img
+                src={scissors}
+                alt="scissors" />
+            </label>
+            
             <input
-              className="mr-2"
+              id="Lizard"
+              className="input-hidden"
               type="radio"
               name="choice"
               value="lizard"
               onChange={handleChoice}
             />
-            Lizard
-          </label>
-          <label className="inline-block font-medium">
+            <label className="inline-block p-4" htmlFor="Lizard">
+              <img 
+                src={lizard} 
+                alt="lizard" />
+            </label>
+            
             <input
-              className="mr-2"
+              id="Spock"
+              className="input-hidden"
               type="radio"
               name="choice"
               value="spock"
               onChange={handleChoice}
             />
-            Spock
-          </label>
-        </div>
-        <button
-          className="bg-indigo-500 text-white px-4 py-2 mt-4"
-          onClick={playGame}
-        >
-          Play
-        </button>
+            <label className="inline-block p-4" htmlFor="Spock">
+              <img 
+                src={spock}
+                alt="spock" />
+            </label>
+
+          </div>
+          <button
+            className="bg-teal-600 text-gray-200 px-4 py-2 mt-4 w-40 font-bold"
+            onClick={playGame}
+          >
+            Play
+          </button>
+          
+
         </CardBody>
         <CardFooter>
-          <p className="text-center">&copy; XOTEC Solutions </p>
+          <p className="text-center">Copyright &copy; {(new Date().getFullYear())} by XOTEC Solutions, LLC with 💙 in Florida, USA</p>
         </CardFooter>
     </Card>
     );
