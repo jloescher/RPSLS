@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Card, CardHeader, CardBody, CardFooter, useToast } from '@chakra-ui/react'
 import "./Game.css";
 
 interface GameProps { }
@@ -11,6 +12,7 @@ interface Result {
 const Game: React.FC<GameProps> = () => {
     const [playerChoice, setPlayerChoice] = useState("");
     const [result, setResult] = useState<Result>({ message: "", winner: "" });
+    const toast = useToast()
 
     const handleChoice = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPlayerChoice(e.target.value);
@@ -28,14 +30,24 @@ const Game: React.FC<GameProps> = () => {
       });
       const data = await response.json();
       setResult(data.result);
+      toast({
+        title: `${result.winner} won!`,
+        description: result.message,
+        status: result.winner === "Player" ? 'success' : result.winner === "Computer" ? 'error' : 'warning',
+        duration: 9000,
+        isClosable: true,
+      })
     } catch (e) {
       console.error(e);
     }
-    };
+  };
 
    return (
-      <div className="bg-gray-200 p-5 flex flex-col items-center">
+      <Card className="h-full bg-gray-200 p-5 flex flex-col items-center">
+      <CardHeader>
       <h1 className="text-xl font-medium">Rock Paper Scissors Lizard Spock</h1>
+      </CardHeader>
+      <CardBody>
       <div className="flex flex-col items-center mt-4">
         <label className="inline-block font-medium">
           <input
@@ -94,13 +106,16 @@ const Game: React.FC<GameProps> = () => {
       >
         Play
       </button>
-      {result && (
+      </CardBody>
+      <CardFooter>
+        <p className="text-center">&copy; XOTEC Solutions </p>
+      </CardFooter>
+      {/* {result && (
         <h2 className={`text-center mt-4 font-medium ${result.winner === "Player" ? "text-green-600" : result.winner === "Computer" ? "text-red-600" : "text-gray-600"}`}>
           {result.message}
         </h2>
-      )}
-    </div>
-
+      )} */}
+    </Card>
     );
 
 };
