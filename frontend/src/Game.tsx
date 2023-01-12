@@ -69,6 +69,15 @@ const Game: React.FC<GameProps> = () => {
     }
   };
 
+  let scoreHack = (): number => {
+    const combinedScore = score.computer + score.player + score.tie
+    if ((combinedScore) > 0) {
+      return combinedScore
+    }
+    
+    return 1
+  }
+
    return (
       <Card className="h-full bg-gray-200 p-5 flex flex-col items-center">
         <CardHeader>
@@ -79,19 +88,19 @@ const Game: React.FC<GameProps> = () => {
               <div className="flex-row">
                 <div className="flex-col"><h3>Player: {score.player}</h3></div>
                 <div className="flex-col">
-                  <Progress className="w-24 m-4" colorScheme={score.player > score.computer ? 'green' : 'red'} size='md' max={score.computer + score.player + score.tie} value={score.player} />
+                  <Progress className="w-24 m-4" colorScheme={score.player > score.computer ? 'green' : 'red'} size='md' max={scoreHack()} value={score.player} />
                 </div>
               </div>
               <div className="flex-row">
                 <div className="flex-col"><h3>Computer: {score.computer}</h3></div>
                 <div className="flex-col">
-                  <Progress className="w-24 m-4" colorScheme={score.computer > score.player ? 'green' : 'red'} size='md' max={score.computer + score.player + score.tie} value={score.computer} />
+                  <Progress className="w-24 m-4" colorScheme={score.computer > score.player ? 'green' : 'red'} size='md' max={scoreHack()} value={score.computer} />
                 </div>
               </div>
               <div className="flex-row">
                 <div className="flex-col"><h3>Tie: {score.computer}</h3></div>
                 <div className="flex-col">
-                  <Progress className="w-24 m-4" colorScheme={'yellow'} size='md' max={score.computer + score.player + score.tie} value={score.tie} />
+                  <Progress className="w-24 m-4" colorScheme={'yellow'} size='md' max={scoreHack()} value={score.tie} />
                 </div>
               </div>
           </div>
