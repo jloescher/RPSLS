@@ -10,7 +10,6 @@ interface Result {
 
 const Game: React.FC<GameProps> = () => {
     const [playerChoice, setPlayerChoice] = useState("");
-    const [computerChoice, setComputerChoice] = useState("");
     const [result, setResult] = useState<Result>({ message: "", winner: "" });
 
     const handleChoice = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,7 +24,7 @@ const Game: React.FC<GameProps> = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ choice: playerChoice }),
+        body: JSON.stringify({"choice": playerChoice}),
       });
       const data = await response.json();
       setResult(data.result);

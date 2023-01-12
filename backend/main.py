@@ -8,7 +8,7 @@ origins = [
     "http://127.0.0.1:3000",
 ]
 
-app = FastAPI()
+app = FastAPI(title="RPSLS API")
 
 app.add_middleware(
     CORSMiddleware,
@@ -20,10 +20,10 @@ app.add_middleware(
 
 
 @app.post("/play")
-async def play_game(request: Request, choice: str):
+async def play_game(request: Request, data: dict):
     human = Human()
     # clean up choice
-    choice = choice.strip()
+    choice = data["choice"].strip()
     choice = choice.lower()
     human_choice = human.get_input(choice)
     if human_choice["error"]:
