@@ -1,11 +1,11 @@
 import React, { useState } from "react";
+import YouTubeVideo from "./YouTube-Video";
 import { Card, CardHeader, CardBody, CardFooter, useToast, Progress, Divider } from '@chakra-ui/react'
 import rock from "./images/rock.jpeg"
 import paper from "./images/paper.png"
 import scissors from "./images/scissors.png"
 import lizard from "./images/lizard.jpeg"
 import spock from "./images/spock.jpeg"
-
 import "./Game.css";
 
 interface GameProps { }
@@ -174,6 +174,8 @@ const Game: React.FC<GameProps> = () => {
           >
             Play
           </button>
+
+          <YouTubeVideo />
           
 
         </CardBody>
