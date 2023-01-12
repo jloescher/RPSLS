@@ -33,7 +33,7 @@ const Game: React.FC<GameProps> = () => {
 
   const playGame = async () => {
     try {
-      await fetch("http://127.0.0.1:8000/play", {
+      await fetch(`${window.location.origin}/play`, {
         mode: "cors",
         method: "POST",
         headers: {
