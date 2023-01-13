@@ -84,6 +84,14 @@ const Game: React.FC<GameProps> = () => {
       player: 0,
       tie: 0,
     })
+    let radios: any = document.querySelector('input[name="choice"]') // Hacked with any
+    if (radios != null) {
+      for (let i=0; i < radios.length; i++) {
+        let radioButton = radios[i]
+        radioButton.checked = false
+      }
+    }
+    
   }
 
    return (
