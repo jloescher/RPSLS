@@ -84,7 +84,7 @@ const Game: React.FC<GameProps> = () => {
           <h1 className="text-xl font-medium">Rock Paper Scissors Lizard Spock</h1>
         </CardHeader>
         <CardBody>
-          <div className="flex flex-row items-end">
+          <div className="flex-wrap flex-row items-end">
               <div className="flex-row">
                 <div className="flex-col"><h3>Player: {score.player}</h3></div>
                 <div className="flex-col">
