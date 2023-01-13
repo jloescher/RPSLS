@@ -105,7 +105,7 @@ const Game: React.FC<GameProps> = () => {
               </div>
           </div>
           <Divider />
-          <div className="flex flex-row items-center m-4">
+          <div className="flex-wrap flex-row items-center m-4">
             <input
               id="Rock"
               className="input-hidden"
