@@ -87,12 +87,13 @@ const Game: React.FC<GameProps> = () => {
   }
 
    return (
-      <Card className="h-full bg-gray-200 p-5 flex flex-col items-center">
+      <Card className="bg-gray-200 p-5">
         <CardHeader>
-          <h1 className="text-xl font-medium">Rock Paper Scissors Lizard Spock</h1>
+          <h1 className="text-xl font-medium text-center">Rock Paper Scissors Lizard Spock</h1>
         </CardHeader>
         <CardBody>
-          <div className="flex flex-wrap flex-row">
+          <Center>
+            <Box className="flex flex-wrap flex-row">
               <div className="flex flex-col">
                   <h3 className="w-24 m-4">Player: {score.player}</h3>
                   <Progress className="w-24 m-4" colorScheme={score.player > score.computer ? 'green' : 'red'} size='md' max={scoreHack()} value={score.player} />
@@ -105,82 +106,85 @@ const Game: React.FC<GameProps> = () => {
                   <h3 className="w-24 m-4">Tie: {score.computer}</h3>
                   <Progress className="w-24 m-4" colorScheme={'yellow'} size='md' max={scoreHack()} value={score.tie} />
               </div>
-          </div>
+            </Box>
+          </Center>
           <Divider />
-          <div className="flex-wrap flex-row items-center m-4">
-            <input
-              id="Rock"
-              className="input-hidden"
-              type="radio"
-              name="choice"
-              value="rock"
-              onChange={handleChoice}
-            />
-            <label className="inline-block p-4" htmlFor="Rock">
-              <img
-                src={rock}
-                alt="Rock" />
-            </label>
-            
-            <input
-              id="Paper"
-              className="input-hidden"
-              type="radio"
-              name="choice"
-              value="paper"
-              onChange={handleChoice}
-            />
-            <label className="inline-block p-4" htmlFor="Paper">
-              <img
-                src={paper}
-                alt="Paper" />
-            </label>
-            
-            <input
-              id="Scissors"
-              className="input-hidden"
-              type="radio"
-              name="choice"
-              value="scissors"
-              onChange={handleChoice}
-            />
-            <label className="inline-block p-4" htmlFor="Scissors">
-              <img
-                src={scissors}
-                alt="scissors" />
-            </label>
-            
-            <input
-              id="Lizard"
-              className="input-hidden"
-              type="radio"
-              name="choice"
-              value="lizard"
-              onChange={handleChoice}
-            />
-            <label className="inline-block p-4" htmlFor="Lizard">
-              <img 
-                src={lizard} 
-                alt="lizard" />
-            </label>
-            
-            <input
-              id="Spock"
-              className="input-hidden"
-              type="radio"
-              name="choice"
-              value="spock"
-              onChange={handleChoice}
-            />
-            <label className="inline-block p-4" htmlFor="Spock">
-              <img 
-                src={spock}
-                alt="spock" />
-            </label>
-
-          </div>
           <Center>
-            <Box className="flex flex-wrap w-50">
+            <Box className="flex flex-wrap flex-row">
+              <input
+                id="Rock"
+                className="input-hidden"
+                type="radio"
+                name="choice"
+                value="rock"
+                onChange={handleChoice}
+              />
+              <label className="inline-block p-4" htmlFor="Rock">
+                <img
+                  src={rock}
+                  alt="Rock" />
+              </label>
+              
+              <input
+                id="Paper"
+                className="input-hidden"
+                type="radio"
+                name="choice"
+                value="paper"
+                onChange={handleChoice}
+              />
+              <label className="inline-block p-4" htmlFor="Paper">
+                <img
+                  src={paper}
+                  alt="Paper" />
+              </label>
+              
+              <input
+                id="Scissors"
+                className="input-hidden"
+                type="radio"
+                name="choice"
+                value="scissors"
+                onChange={handleChoice}
+              />
+              <label className="inline-block p-4" htmlFor="Scissors">
+                <img
+                  src={scissors}
+                  alt="scissors" />
+              </label>
+              
+              <input
+                id="Lizard"
+                className="input-hidden"
+                type="radio"
+                name="choice"
+                value="lizard"
+                onChange={handleChoice}
+              />
+              <label className="inline-block p-4" htmlFor="Lizard">
+                <img 
+                  src={lizard} 
+                  alt="lizard" />
+              </label>
+              
+              <input
+                id="Spock"
+                className="input-hidden"
+                type="radio"
+                name="choice"
+                value="spock"
+                onChange={handleChoice}
+              />
+              <label className="inline-block p-4" htmlFor="Spock">
+                <img 
+                  src={spock}
+                  alt="spock" />
+              </label>
+
+            </Box>
+          </Center>
+          <Center>
+            <Box className="flex flex-wrap w-100">
               <button
                 className="bg-teal-600 text-gray-200 px-4 py-2 mt-4 w-40 font-bold m-4"
                 onClick={playGame}
@@ -196,13 +200,16 @@ const Game: React.FC<GameProps> = () => {
               </button>
             </Box>
           </Center>
+          
 
           <YouTubeVideo />
           
 
         </CardBody>
-        <CardFooter>
-          <p className="text-center">Copyright &copy; {(new Date().getFullYear())} by XOTEC Solutions, LLC with 💙 in Florida, USA</p>
+        <CardFooter className="flex flex-row w-full">
+          <p className="text-center w-full">
+            Copyright &copy; {(new Date().getFullYear())} by XOTEC Solutions, LLC with 💙 in Florida, USA
+          </p>
         </CardFooter>
     </Card>
     );
