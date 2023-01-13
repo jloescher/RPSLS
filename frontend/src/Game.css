@@ -9,13 +9,7 @@ body {
 
 /* RPSLS specific styles */
 
-.container {
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-  text-align: center;
-}
+
 
 .result {
   margin-top: 30px;

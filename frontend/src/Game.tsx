@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import YouTubeVideo from "./YouTube-Video";
-import { Card, CardHeader, CardBody, CardFooter, useToast, Progress, Divider } from '@chakra-ui/react'
+import { Card, CardHeader, CardBody, CardFooter, useToast, Progress, Divider, Box, Center } from '@chakra-ui/react'
 import rock from "./images/rock.jpeg"
 import paper from "./images/paper.png"
 import scissors from "./images/scissors.png"
@@ -78,30 +78,32 @@ const Game: React.FC<GameProps> = () => {
     return 1
   }
 
+  let resetScore = (): void => {
+    setScore({
+      computer: 0,
+      player: 0,
+      tie: 0,
+    })
+  }
+
    return (
       <Card className="h-full bg-gray-200 p-5 flex flex-col items-center">
         <CardHeader>
           <h1 className="text-xl font-medium">Rock Paper Scissors Lizard Spock</h1>
         </CardHeader>
         <CardBody>
-          <div className="flex-wrap flex-row items-end">
-              <div className="flex-row">
-                <div className="flex-col"><h3>Player: {score.player}</h3></div>
-                <div className="flex-col">
+          <div className="flex flex-wrap flex-row">
+              <div className="flex flex-col">
+                  <h3 className="w-24 m-4">Player: {score.player}</h3>
                   <Progress className="w-24 m-4" colorScheme={score.player > score.computer ? 'green' : 'red'} size='md' max={scoreHack()} value={score.player} />
-                </div>
               </div>
-              <div className="flex-row">
-                <div className="flex-col"><h3>Computer: {score.computer}</h3></div>
-                <div className="flex-col">
+              <div className="flex flex-col">
+                  <h3 className="w-24 m-4">Computer: {score.computer}</h3>
                   <Progress className="w-24 m-4" colorScheme={score.computer > score.player ? 'green' : 'red'} size='md' max={scoreHack()} value={score.computer} />
-                </div>
               </div>
-              <div className="flex-row">
-                <div className="flex-col"><h3>Tie: {score.computer}</h3></div>
-                <div className="flex-col">
+              <div className="flex flex-col">
+                  <h3 className="w-24 m-4">Tie: {score.computer}</h3>
                   <Progress className="w-24 m-4" colorScheme={'yellow'} size='md' max={scoreHack()} value={score.tie} />
-                </div>
               </div>
           </div>
           <Divider />
@@ -177,12 +179,23 @@ const Game: React.FC<GameProps> = () => {
             </label>
 
           </div>
-          <button
-            className="bg-teal-600 text-gray-200 px-4 py-2 mt-4 w-40 font-bold"
-            onClick={playGame}
-          >
-            Play
-          </button>
+          <Center>
+            <Box className="flex flex-wrap w-50">
+              <button
+                className="bg-teal-600 text-gray-200 px-4 py-2 mt-4 w-40 font-bold m-4"
+                onClick={playGame}
+              >
+                Play
+              </button>
+
+              <button
+                className="bg-red-600 text-gray-200 px-4 py-2 mt-4 w-40 font-bold m-4"
+                onClick={resetScore}
+              >
+                Reset
+              </button>
+            </Box>
+          </Center>
 
           <YouTubeVideo />
           

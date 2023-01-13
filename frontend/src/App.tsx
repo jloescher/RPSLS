@@ -6,7 +6,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 function App() {
   return (
     <ChakraProvider>
-    <div className="App">
+    <div className="App container">
       <Game />
     </div>
     </ChakraProvider>
